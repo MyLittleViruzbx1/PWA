@@ -1,34 +1,33 @@
-function sumarUno(numero, cabllback){
+function sumarUno(numero){
 
-    if(numero >= 7){
-        cabllback('Numero muy alto');
-        return;
-    }
-    setTimeout(function(){
-        cabllback(null, numero + 1)
-    }, 800);
-}
+    return promesa = new Promise((resolve, reject) =>{
+        
+        if(numero >= 7){
+            reject('El numero es muy alto');
+        }
 
-sumarUno(5, function(error, nuevoValor){
-    if(error){
-        console.log(error);
-        return;
-    }
 
-    sumarUno(nuevoValor, function(error, nuevoValor2){
-    if(error){
-        console.log(error);
-        return;
-    }
-       sumarUno(nuevoValor2, function(error, nuevoValor3){
-       if(error){
-        console.log(error);
-        return;
-       }
-
-        console.log(nuevoValor3);
-
-       });
+        setTimeout(function(){
+            resolve( numero + 1)
+        }, 800);
     });
-
-});
+   
+}
+sumarUno(5)
+    .then(sumarUno())
+    .then(sumarUno())
+    .then(nuevoNumero =>{
+            console.log(nuevoNumero);
+            return sumarUno(nuevoNumero);
+        })
+        .then(nuevoNumero =>{
+                console.log(nuevoNumero);
+                return sumarUno(nuevoNumero);
+            })
+            .then(nuevoNumero =>{
+                    console.log(nuevoNumero)
+                })
+                .catch(error =>{
+                    console.log(' Error en promesas ');
+                    console.log(error);
+                })
