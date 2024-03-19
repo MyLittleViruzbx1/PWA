@@ -1,7 +1,10 @@
 // peticion GET
 
 fetch('https://reqres.in/api/users')
-    .then (resp =>{
-        resp.json().then(console.log)
-        // console.log(resp);
+    .then (resp => resp.json())
+    .then (respObj =>{
+        console.log(respObj);
+        console.log(respObj.page);
+        console.log(respObj.per_page);
+
     })
