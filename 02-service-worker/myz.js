@@ -1,17 +1,16 @@
 self.addEventListener('fetch', event=>{
     
-    // console.log(event);
+    const resp =   fetch(event.request)
+                .then(resp =>{
+                    if(resp.ok){
 
-    if (event.request.url.includes('.jpg')){
+                        return resp;
+                    }else{
+                        return fetch('img/main.jpg')
+                    }
+                })
 
-        // let fotoreq = fetch('img/main.jpg');
-        // let fotoreq = fetch(event.request.url);
-        let fotoreq = fetch(event.request);
-            event.respondWith( fotoreq );
-    }
-        // else {
-    //     event.respondWith( fetch(event.request) );
-    // }
 
+    event.respondWith( resp )
 
 });
